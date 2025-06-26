@@ -1,11 +1,15 @@
 package enocta.utils;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import enocta.testbase.PageInitializer;
 
 public class CommonMethods extends PageInitializer{
@@ -403,17 +408,17 @@ public class CommonMethods extends PageInitializer{
 	public static byte[] takeScreenshot(String fileName)
 	{
 		
-		//String destination = Constants.SCREENSHOT_FILEPATH + fileName + getTimestamp() + ".png";
+		String destination = Constants.SCREENSHOT_FILEPATH + fileName + getTimestamp() + ".png";
 		
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		
-		//File screenShot = ts.getScreenshotAs(OutputType.FILE);
+		File screenShot = ts.getScreenshotAs(OutputType.FILE);
 		
-		//try {
-		//	FileUtils.copyFile(screenShot, new File(destination));
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
+		try {
+			FileUtils.copyFile(screenShot, new File(destination));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		byte[] screenshotBytes = ts.getScreenshotAs(OutputType.BYTES);
 		
