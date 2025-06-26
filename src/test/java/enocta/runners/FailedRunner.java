@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		
 		features="@target/failed.txt",
-		glue="com.neotech.steps", 		
+		glue="enocta.steps", 		
 		//dryRun=false, 
 		//monochrome=true, 
 		

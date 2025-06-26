@@ -31,8 +31,7 @@ public class BaseClass {
 			break;
 
 		default:
-			//We could use chrome as a case to cover the possibility of no match
-			//driver = new ChromeDriver();
+
 			break;
 
 		}

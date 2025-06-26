@@ -12,11 +12,11 @@ import io.cucumber.junit.CucumberOptions;
 		features="src/test/resources/features/",
 
 		//we can specify where the codes for the features are
-		glue="com.neotech.steps", 
+		glue="enocta.steps", 
 		
 		//if this is set to true --> it only checks if the steps are glued (no functionality execution)
 		
-		dryRun=false, 
+		dryRun=true, 
 		
 		// by default is false. When true will makes the console (and logs) more readable.
 		monochrome=true, 
