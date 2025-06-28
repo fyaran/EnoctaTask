@@ -1,14 +1,17 @@
 package enocta.steps;
 
+
+import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-
 import enocta.utils.CommonMethods;
 import enocta.utils.ConfigsReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class n11Steps extends CommonMethods {
+	
+	String pName = null;
 
 	@When("Go to login page")
 	public void go_to_login_page() {
@@ -64,60 +67,66 @@ public class n11Steps extends CommonMethods {
 		{
 			System.out.println("There is no another store to sell this phone");
 			click(n11Page.add);
+			pName = n11Page.phoneName1.getText();
+			return;
 		}
-		else if(n11Page.pointsOfStores.size() == 1)
+		if(n11Page.pointsOfStores.size() == 1)
 		{
-			click(n11Page.pointsOfStores.get(0));
+			
 			click(n11Page.add);
+			pName = n11Page.phoneName1.getText();
+			return;
 		}
-		else
-		{
-			int lowestP = 10;
-			WebElement lowestPElement = null;
-			do
-			{
+		
+		
+			double lowestP = Double.MAX_VALUE;
+			WebElement lowestScoreSeller = null;
+		    do {
+		       
 
-				for (WebElement pElement : n11Page.pointsOfStores)
-				{
-					try {
-						String pointText = pElement.getText().trim();
-						double point = Double.parseDouble(pointText);
-					
-						if (point < lowestP)
-						{
-							lowestP = (int) point;
-							lowestPElement = pElement;
-						}
-					}
-					catch (NumberFormatException e){
-					System.out.println("Point couldn't catch " + pElement.getText());
-					
-					}
-				}
-				if(!n11Page.nextBt.isEmpty() && n11Page.nextBt.get(0).isDisplayed())
-				{
-					click(n11Page.nextBt.get(0));
-				}else {
-					break;
-				}
-				
-			}while (true);
-			
-			
-			
-			if(lowestPElement != null)
-			{
-				click(lowestPElement);
-			}
+		        for (WebElement sellerElement : n11Page.pointsOfStores) {
+		            try {
+		                String pointText = sellerElement.getText().trim().replace(",", ".");
+		                if (pointText.matches("\\d+(\\.\\d+)?")) {
+		                    double point = Double.parseDouble(pointText);
+		                    if (point < lowestP) {
+		                        lowestP = point;
+		                        lowestScoreSeller = sellerElement;
+		                    }
+		                }
+		            } catch (Exception e) {
+		                System.out.println("Couldn't read the point: " + sellerElement.getText());
+		            }
+		        }
+
+		        if (!n11Page.nextBt.isEmpty() && n11Page.nextBt.get(0).isDisplayed()) {
+		            click(n11Page.nextBt.get(0));
+		            wait(2);
+		        } else {
+		            break;
+		        }
+
+		    } while (true);
+
+		    if (lowestScoreSeller != null) {
+		        jsClick(lowestScoreSeller);
+		        click(n11Page.add);
+		        pName = n11Page.phoneName1.getText();
+		       
+		    } else {
+		        System.out.println("Failed to find store");
+		    }
 		
 		}
 		
-	}
+	
 
 	@Then("I add the shopping cart and check it")
 	public void i_add_the_shopping_cart_and_check_it() {
-		
-		
+
+		click(n11Page.sCartBt);
+		String sCartPName = n11Page.phoneName2.getText();
+		Assert.assertEquals("The account name does not match",pName, sCartPName);
 
 	}
 

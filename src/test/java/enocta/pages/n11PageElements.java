@@ -46,8 +46,17 @@ public class n11PageElements {
 	@FindBy(xpath = "//*[@id=\"unf-sell\"]/div[2]/div[1]/div[11]/a[3]")
 	public List<WebElement> nextBt;
 	
-	@FindBy(xpath = "//*[@id=\"unfDetailForm\"]/div/div/div/button")
+	@FindBy(xpath = "//*[@id=\"unfDetailForm\"]//button[@class='addBasketUnify']")
 	public WebElement add;
+	
+	@FindBy(xpath = "//*[@id=\"unf-p-id\"]//div/h1")
+	public WebElement phoneName1;
+	
+	@FindBy(xpath = "//*[@id=\"header\"]/div/div/div/div/div/a/i")
+	public WebElement sCartBt;
+	
+	@FindBy(xpath = "//*[@id=\"newCheckout\"]/div//table/tbody/tr/td/div/div/a")
+	public WebElement phoneName2;
 
 	
 	public n11PageElements()

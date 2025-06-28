@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.neotech</groupId>
-	<artifactId>CucumberFramework8</artifactId>
+	<groupId>enocta</groupId>
+	<artifactId>EnoctaTask</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -90,7 +90,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>CucumberFramework8</projectName>
+							<projectName>EnoctaTask</projectName>
 
 							<!-- output directory for the generated report -->
 							<outputDirectory>${project.build.directory}</outputDirectory>
